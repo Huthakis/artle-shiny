@@ -35,7 +35,7 @@ def questioner(data, rand_number, guess, rounds, tolerance):
             pass
         
     else:
-        return f'''Out of rounds! The is {data.name.iloc[rand_number]}, by {data.artist.iloc[rand_number]}, and it was auctioned for ${data.price.iloc[rand_number]}'''
+        return f'''Out of rounds! This is {data.name.iloc[rand_number]}, by {data.artist.iloc[rand_number]}, and it was auctioned for ${data.price.iloc[rand_number]}'''
     #os.remove(file)  # Delete the downloaded image file
 
 # Function for future seperation of questioner and clues
