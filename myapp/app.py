@@ -38,7 +38,9 @@ app_ui = ui.page_fluid(
     ui.output_text('outcome'),
     #ui.output_text('round_number'),
     #ui.output_text('real_price'),
-    ui.output_text('clue')
+    ui.output_text('clue'),
+    ui.br(),
+    ui.p("Data Source: Jason Shi. Art Auction Valuation", ui.a("GitHub Dataset", href= "https://github.com/jasonshi10/art_auction_valuation/blob/master/data.txt"))
 )
 
 #%% Backend Definition
