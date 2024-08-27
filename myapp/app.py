@@ -30,13 +30,10 @@ app_ui = ui.page_fluid(
     ),
     ui.h3('How much is this art worth?'),
     ui.img(src=url, width='320px'),
-    #ui.h6('Enter your guess!'),
-    ui.row(
-        ui.column(6, ui.output_ui('input_hider')),
-        ui.column(6, ui.input_action_button("submit", "Submit"))
-    ),
+    ui.output_text('round_number'),
+    ui.column(6, ui.output_ui('input_hider')),
+    ui.column(6, ui.input_action_button("submit", "Submit")),
     ui.output_text('outcome'),
-    #ui.output_text('round_number'),
     #ui.output_text('real_price'),
     ui.output_text('clue'),
     ui.br(),
@@ -61,8 +58,13 @@ def server(input, output, session):
     @render.text
     def round_number():
         rounds = input.submit()+1
-        return rounds
-    
+        remaining = 7-rounds
+        if remaining > 0:
+            return f'There are {remaining} rounds remaining'
+        else:
+            return 'There are no rounds remaining'
+
+
     # Give clue
     @output
     @render.text
