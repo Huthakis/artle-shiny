@@ -16,10 +16,10 @@ art_df = pd.read_csv(app_dir / 'sdata.txt', sep='\t', usecols=useful_cols)
 art_df = remove_singles(art_df)
 
 # Game setup
-rand_number = rd.randint(0, len(art_df) - 1)
+rand_number = rd.randint(0, len(art_df) +1)
 # Get and display image of random art
-url = art_df.source.loc[rand_number]
-filename = art_df.source.loc[rand_number].split('/')[-1]
+url = art_df.source.iloc[rand_number]
+filename = art_df.source.iloc[rand_number].split('/')[-1]
 
 
 #%% Frontend Definition
@@ -36,9 +36,6 @@ app_ui = ui.page_fluid(
     ui.output_text('clue'),
     ui.br(),
     ui.br(),
-    #ui.p(rand_number),
-    #ui.output_text('real_price'),
-    #ui.p(art_df.price.iloc[rand_number]),
     ui.p('Data Source: Jason Shi. Art Auction Valuation, ', ui.a('GitHub Dataset', href= 'https://github.com/jasonshi10/art_auction_valuation/blob/master/data.txt'), style='font-size: 12px')
 )
 
