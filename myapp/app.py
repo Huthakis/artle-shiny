@@ -25,11 +25,10 @@ filename = art_df.source.loc[rand_number].split('/')[-1]
 #%% Frontend Definition
 app_ui = ui.page_fluid(
     ui.row(
-        ui.column(11,ui.panel_title('Artle Shiny!')),
+        ui.column(11,ui.panel_title('Artle! How much is art worth?')),
         ui.column(1, ui.input_dark_mode())
     ),
-    ui.h3('How much is this art worth?'),
-    ui.img(src=url, width='320px'),
+    ui.img(src=url, width='400px'),
     ui.output_text('round_number'),
     ui.column(6, ui.output_ui('input_hider')),
     ui.column(6, ui.input_action_button("submit", "Submit")),
@@ -37,7 +36,8 @@ app_ui = ui.page_fluid(
     #ui.output_text('real_price'),
     ui.output_text('clue'),
     ui.br(),
-    ui.p("Data Source: Jason Shi. Art Auction Valuation", ui.a("GitHub Dataset", href= "https://github.com/jasonshi10/art_auction_valuation/blob/master/data.txt"))
+    ui.br(),
+    ui.p('Data Source: Jason Shi. Art Auction Valuation, ', ui.a('GitHub Dataset', href= 'https://github.com/jasonshi10/art_auction_valuation/blob/master/data.txt'), style='font-size: 12px')
 )
 
 #%% Backend Definition
@@ -50,7 +50,8 @@ def server(input, output, session):
         rounds = input.submit()+1
         if rounds <= 6:
             return ui.TagList(
-                ui.input_numeric('g', 'Enter your guess!', min=1, value=0),
+                #ui.input_numeric('g', 'Enter your guess!', min=1, value=0),
+                ui.input_text('g', 'Enter your guess!', None),  
             )
 
     # Give round
