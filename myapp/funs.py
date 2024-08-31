@@ -24,9 +24,9 @@ def questioner(data, rand_number, guess, rounds, tolerance):
         print('Your answer: $' + str(answer))
         # Logic for checking guess
         if answer == data.price.iloc[rand_number]:
-            return f'You are right! The exact price was ${data.price.iloc[rand_number]}.'
+            return f'You are right! This is {data.name.iloc[rand_number]}, by {data.artist.iloc[rand_number]}, and it was auctioned for ${data.price.iloc[rand_number]}.'
         elif data.price.iloc[rand_number] * (1 - tolerance) <= answer <= data.price.iloc[rand_number] * (1 + tolerance):
-            return f'You are within {100 * tolerance}%. The exact price was ${data.price.iloc[rand_number]}.'
+            return f'You are within {100 * tolerance}%. The exact price was ${data.price.iloc[rand_number]}. This is {data.name.iloc[rand_number]}, by {data.artist.iloc[rand_number]}, and it was auctioned for ${data.price.iloc[rand_number]}.'
         elif answer > data.price.iloc[rand_number]:
             return 'Too High'
         elif answer < data.price.iloc[rand_number]:

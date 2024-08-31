@@ -33,10 +33,12 @@ app_ui = ui.page_fluid(
     ui.column(6, ui.output_ui('input_hider')),
     ui.column(6, ui.input_action_button("submit", "Submit")),
     ui.output_text('outcome'),
-    #ui.output_text('real_price'),
     ui.output_text('clue'),
     ui.br(),
     ui.br(),
+    #ui.p(rand_number),
+    #ui.output_text('real_price'),
+    #ui.p(art_df.price.iloc[rand_number]),
     ui.p('Data Source: Jason Shi. Art Auction Valuation, ', ui.a('GitHub Dataset', href= 'https://github.com/jasonshi10/art_auction_valuation/blob/master/data.txt'), style='font-size: 12px')
 )
 
