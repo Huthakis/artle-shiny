@@ -27,15 +27,15 @@ def questioner(data, guess, price, rand_number, rounds, tolerance):
         print('Your answer: $' + str(answer))
         # Logic for checking guess
         if answer == price:
-            return (f'You are right! This is {data.name.iloc[rand_number]}, 
-                    by {data.artist.iloc[rand_number]}, and it was auctioned 
-                    for ${data.price.iloc[rand_number]}.')
+            return (f'You are right! This is {data.name.iloc[rand_number]}, '
+                    f'by {data.artist.iloc[rand_number]}, and it was auctioned '
+                    f'for ${data.price.iloc[rand_number]}.')
         elif price * (1 - tolerance) <= answer <= price * (1 + tolerance):
-            return (f'You are within {100 * tolerance}%. The exact price was 
-                    ${data.price.iloc[rand_number]}. This is 
-                    {data.name.iloc[rand_number]}, by 
-                    {data.artist.iloc[rand_number]}, and it was auctioned 
-                    for ${data.price.iloc[rand_number]}.')
+            return (f'You are within {100 * tolerance}%. The exact price was '
+                    f'${data.price.iloc[rand_number]}. This is '
+                    f'{data.name.iloc[rand_number]}, by '
+                    f'{data.artist.iloc[rand_number]}, and it was auctioned '
+                    f'for ${data.price.iloc[rand_number]}.')
         elif answer > price:
             return 'Too High'
         elif answer < price:
@@ -43,9 +43,9 @@ def questioner(data, guess, price, rand_number, rounds, tolerance):
         else:
             pass        
     else:
-        return (f'This is {data.name.iloc[rand_number]}, by 
-                {data.artist.iloc[rand_number]}, and it was auctioned 
-                for ${data.price.iloc[rand_number]}')
+        return (f'This is {data.name.iloc[rand_number]}, by '
+                f'{data.artist.iloc[rand_number]}, and it was auctioned '
+                f'for ${data.price.iloc[rand_number]}')
 
 # Function to provide clues
 def get_clue(data, price, rand_number, rounds):
@@ -55,7 +55,7 @@ def get_clue(data, price, rand_number, rounds):
         if rounds == 2:
             return f'The art is called: {data.name.iloc[rand_number]}'
         elif rounds == 3:
-            return f'The artist is from: {data.country.iloc[rand_number]}'
+            return f'The artist is: {data.country.iloc[rand_number]}'
         elif rounds == 4:
             if pd.isna(data.yearOfDeath.iloc[rand_number]):
                 return 'The artist is alive.'
