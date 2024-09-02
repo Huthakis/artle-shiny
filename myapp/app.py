@@ -43,7 +43,7 @@ df_url = 'https://github.com/jasonshi10/art_auction_valuation/blob/master/data.t
 app_ui = ui.page_fluid(
     ui.row(
         ui.column(11, ui.panel_title('Artle! How much is art worth?')),
-        ui.column(1, ui.input_dark_mode())
+        ui.column(1, ui.input_dark_mode()),
     ),
     ui.img(src=url, width='400px'),
     ui.output_text('round_number'),
@@ -73,8 +73,8 @@ def server(input, output, session):
         rounds = input.submit() + 1
         if rounds <= 6:
             return ui.TagList(
-                #ui.input_numeric('g', 'Enter your guess!', min=1, value=0),
-                ui.input_text('g', 'Enter your guess!', None),  
+                # ui.input_numeric('g', 'Enter your guess!', min=1, value=0),
+                ui.input_text('g', 'Enter your guess!', None),
             )
 
     # Give round
@@ -95,7 +95,7 @@ def server(input, output, session):
         rounds = input.submit() + 1
         clue = get_clue(art_df, price, rand_number, rounds)
         return clue
-    
+
     # Render result based on guess
     @output
     @render.text
@@ -114,4 +114,3 @@ def server(input, output, session):
 
 # %% Run App
 app = App(app_ui, server)
-
