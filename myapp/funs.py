@@ -1,3 +1,5 @@
+# Functions for shiny app
+
 # Packages
 import pandas as pd
 
@@ -12,7 +14,8 @@ def remove_singles(data):
     # Return data
     return filtered_data
 
-def questioner(data, rand_number, guess, rounds, tolerance):
+# Function to check answer
+def questioner(data, guess, price, rand_number, rounds, tolerance):
     # Logic for game
     if rounds <= 6:
         # Get user guess
@@ -23,23 +26,30 @@ def questioner(data, rand_number, guess, rounds, tolerance):
             answer = 0
         print('Your answer: $' + str(answer))
         # Logic for checking guess
-        if answer == data.price.iloc[rand_number]:
-            return f'You are right! This is {data.name.iloc[rand_number]}, by {data.artist.iloc[rand_number]}, and it was auctioned for ${data.price.iloc[rand_number]}.'
-        elif data.price.iloc[rand_number] * (1 - tolerance) <= answer <= data.price.iloc[rand_number] * (1 + tolerance):
-            return f'You are within {100 * tolerance}%. The exact price was ${data.price.iloc[rand_number]}. This is {data.name.iloc[rand_number]}, by {data.artist.iloc[rand_number]}, and it was auctioned for ${data.price.iloc[rand_number]}.'
-        elif answer > data.price.iloc[rand_number]:
+        if answer == price:
+            return (f'You are right! This is {data.name.iloc[rand_number]}, 
+                    by {data.artist.iloc[rand_number]}, and it was auctioned 
+                    for ${data.price.iloc[rand_number]}.')
+        elif price * (1 - tolerance) <= answer <= price * (1 + tolerance):
+            return (f'You are within {100 * tolerance}%. The exact price was 
+                    ${data.price.iloc[rand_number]}. This is 
+                    {data.name.iloc[rand_number]}, by 
+                    {data.artist.iloc[rand_number]}, and it was auctioned 
+                    for ${data.price.iloc[rand_number]}.')
+        elif answer > price:
             return 'Too High'
-        elif answer < data.price.iloc[rand_number]:
+        elif answer < price:
             return 'Too low'
         else:
-            pass
-        
+            pass        
     else:
-        return f'''This is {data.name.iloc[rand_number]}, by {data.artist.iloc[rand_number]}, and it was auctioned for ${data.price.iloc[rand_number]}'''
-    #os.remove(file)  # Delete the downloaded image file
+        return (f'This is {data.name.iloc[rand_number]}, by 
+                {data.artist.iloc[rand_number]}, and it was auctioned 
+                for ${data.price.iloc[rand_number]}')
 
-# Function for future seperation of questioner and clues
-def get_clue(data, rand_number, rounds):
+# Function to provide clues
+def get_clue(data, price, rand_number, rounds):
+        artist = data.artist.iloc[rand_number]
         if rounds == 1:
             return 'Make your first guess!'
         if rounds == 2:
@@ -52,10 +62,10 @@ def get_clue(data, rand_number, rounds):
             else:
                 return f'The artist died in: {data.yearOfDeath.iloc[rand_number]}'
         elif rounds == 5:
-            return f'The artist is: {data.artist.iloc[rand_number]}'
+            return f'The artist is: {artist}'
         elif rounds == 6:
-            artist_prices = data[data['artist'] == data.artist.iloc[rand_number]].price
-            artist_other = artist_prices[artist_prices != data.price.iloc[rand_number]].sample(n=1).values[0]
-            return f'Other art by this artist has sold for: ${artist_other}'
+            other_prices = data[data['artist'] == artist].price
+            selection = other_prices[other_prices != price].sample(n=1).values[0]
+            return f'Other art by this artist has sold for: ${selection}'
         else:
             return ''
